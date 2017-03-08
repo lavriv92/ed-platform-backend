@@ -10,6 +10,10 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const (
+	API_VERSION = "1"
+)
+
 type Route struct {
 	Name        string
 	Method      string
@@ -35,19 +39,30 @@ func NewRouter() *mux.Router {
 	return router
 }
 
+func _NewRoute(namespace string, name string, method string, endpoint string, handler http.HandlerFunc) Route {
+	return Route{
+		name,
+		method,
+		fmt.Sprintf("/%s/v%s%s", namespace, API_VERSION, endpoint),
+		handler,
+	}
+}
+
 var routes = Routes{
-	Route{
+	_NewRoute(
+		"",
 		"Index",
 		"GET",
 		"/",
 		IndexHandler,
-	},
-	Route{
+	),
+	_NewRoute(
+		"api",
 		"Cources",
 		"GET",
 		"/cources",
 		cources.CourcesIndexHandler,
-	},
+	),
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
