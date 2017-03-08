@@ -5,16 +5,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"app/routes"
 )
 
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", IndexHandler)
+	router := routes.NewRouter()
 
+	fmt.Println("Server listen on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8000", router))
-}
-
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "ed platform rest api")
 }
