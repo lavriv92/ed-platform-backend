@@ -62,13 +62,6 @@ func _NewApiRoute(namespace string, name string, method string, endpoint string,
 
 var routes = Routes{
 	_NewRoute(
-		"",
-		"Index",
-		"GET",
-		"/",
-		IndexHandler,
-	),
-	_NewRoute(
 		"auth",
 		"Auth",
 		"GET",
@@ -82,8 +75,4 @@ var routes = Routes{
 		"/cources",
 		cources.CourcesIndexHandler,
 	),
-}
-
-func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "ed platform rest api home")
 }
