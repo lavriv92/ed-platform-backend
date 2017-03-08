@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"app/auth"
 	"app/cources"
 	"app/errors"
 	"app/logger"
@@ -45,6 +46,15 @@ func _NewRoute(namespace string, name string, method string, endpoint string, ha
 	return Route{
 		name,
 		method,
+		fmt.Sprintf("/%s%s", namespace, endpoint),
+		handler,
+	}
+}
+
+func _NewApiRoute(namespace string, name string, method string, endpoint string, handler http.HandlerFunc) Route {
+	return Route{
+		name,
+		method,
 		fmt.Sprintf("/%s/v%s%s", namespace, API_VERSION, endpoint),
 		handler,
 	}
@@ -59,6 +69,13 @@ var routes = Routes{
 		IndexHandler,
 	),
 	_NewRoute(
+		"auth",
+		"Auth",
+		"GET",
+		"/login",
+		auth.AuthLoginHandler,
+	),
+	_NewApiRoute(
 		"api",
 		"Cources",
 		"GET",
