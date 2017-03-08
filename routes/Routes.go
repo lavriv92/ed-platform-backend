@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"app/cources"
+	"app/errors"
 	"app/logger"
 
 	"github.com/gorilla/mux"
@@ -25,6 +26,7 @@ type Routes []Route
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
+	router.NotFoundHandler = http.HandlerFunc(errors.RouteNotFoundHandler)
 	for _, route := range routes {
 		var handler http.Handler
 		handler = route.HandlerFunc
