@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"app/auth"
-	"app/cources"
+	"app/courses"
 	"app/errors"
 	"app/logger"
 
@@ -72,7 +72,7 @@ var routes = Routes{
 		"api",
 		"Cources",
 		"GET",
-		"/cources",
-		cources.CourcesIndexHandler,
+		"/courses",
+		courses.CoursesIndexHandler,
 	),
 }

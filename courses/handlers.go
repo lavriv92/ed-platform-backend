@@ -8,7 +8,7 @@ import (
 	"app/models"
 )
 
-func CourcesIndexHandler(w http.ResponseWriter, r *http.Request) {
+func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	session, err := models.NewSession()
 	if err != nil {
 		log.Printf("Format err")
