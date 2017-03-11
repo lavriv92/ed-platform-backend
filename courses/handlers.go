@@ -1,4 +1,4 @@
-package cources
+package courses
 
 import (
 	"encoding/json"

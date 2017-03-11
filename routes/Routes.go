@@ -70,7 +70,7 @@ var routes = Routes{
 	),
 	_NewApiRoute(
 		"api",
-		"Cources",
+		"Courses",
 		"GET",
 		"/courses",
 		courses.CoursesIndexHandler,
