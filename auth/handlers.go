@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func AuthLoginHandler(w http.ResponseWriter, r *http.Request) {
-	response := AuthSuccessResponse{ "some token" }
+func AuthTokenHandler(w http.ResponseWriter, r *http.Request) {
+	response := AuthSuccessResponse{"some token"}
 	json.NewEncoder(w).Encode(response)
 }

@@ -65,8 +65,8 @@ var routes = Routes{
 		"auth",
 		"Auth",
 		"GET",
-		"/login",
-		auth.AuthLoginHandler,
+		"/token",
+		auth.AuthTokenHandler,
 	),
 	_NewApiRoute(
 		"api",

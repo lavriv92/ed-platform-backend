@@ -16,6 +16,3 @@ RUN go get
 RUN go build ./main.go
 
 CMD ["./main"]
-
-
-

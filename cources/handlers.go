@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"time"
+
+	"app/models"
 )
 
 type Course struct {
@@ -15,6 +17,9 @@ type Course struct {
 type Courses []Course
 
 func CourcesIndexHandler(w http.ResponseWriter, r *http.Request) {
+
+	models.NewSession()
+
 	courses := Courses{
 		Course{
 			Name:        "Software engineering",

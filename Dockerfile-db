@@ -1,0 +1,11 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER ed_platform_user
+
+ENV POSTGRES_DB ed_platform
+
+ENV POSTGRES_PASSWORD "ed_platform_password"
+
+EXPOSE 5432
+
+ADD schema.sql /docker-entrypoint-initdb.d/

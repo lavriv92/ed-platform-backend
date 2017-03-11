@@ -1,7 +1,11 @@
 version: '2'
 services: 
   db:
-    image: postgres:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-db
+    ports:
+      - "5432:5432"
   web:
     build: .
     volumes: 
