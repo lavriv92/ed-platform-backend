@@ -6,6 +6,6 @@ CREATE SCHEMA IF NOT EXISTS ed_platform;
 		password   VARCHAR(255) NOT NULL,
 		first_name VARCHAR(255),
 		last_name  VARCHAR(255),
-		created_timestamp TIMESTAMP DEFAULT NOW(),
-		updated_timestamp TIMESTAMP
+		created_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+		updated_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 	);

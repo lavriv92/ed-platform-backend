@@ -2,33 +2,27 @@ package cources
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
-	"time"
 
 	"app/models"
 )
 
-type Course struct {
-	Name        string    `json:"name"`
-	Description string    `json:"description"`
-	Date        time.Time `json:"updated"`
-}
-
-type Courses []Course
-
 func CourcesIndexHandler(w http.ResponseWriter, r *http.Request) {
-
-	models.NewSession()
-
-	courses := Courses{
-		Course{
-			Name:        "Software engineering",
-			Description: "Description",
-		},
-		Course{
-			Name:        "Software engineering 2",
-			Description: "Description",
-		},
+	session, err := models.NewSession()
+	if err != nil {
+		log.Printf("Format err")
 	}
-	json.NewEncoder(w).Encode(courses)
+	var users []models.User
+	err = session.Collection("users").Find().All(&users)
+	if err != nil {
+		log.Printf("Error select users")
+	}
+
+	for _, user := range users {
+		fmt.Printf("%s .\n", user.FirstName)
+	}
+
+	json.NewEncoder(w).Encode(users)
 }

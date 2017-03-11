@@ -3,6 +3,7 @@ package models
 import (
 	"log"
 
+	"upper.io/db.v3/lib/sqlbuilder"
 	"upper.io/db.v3/postgresql"
 )
 
@@ -13,21 +14,11 @@ var settings = postgresql.ConnectionURL{
 	Password: "ed_platform_password",
 }
 
-func NewSession() {
+func NewSession() (sqlbuilder.Database, error) {
 	session, err := postgresql.Open(settings)
 	if err != nil {
 		log.Printf("Can not connect to database")
+		return nil, err
 	}
-
-	defer session.Close()
-
-	var users []User
-	err = session.Collection("users").Find().All(&users)
-	if err != nil {
-		log.Printf("Find(): %q\n", err)
-	}
-
-	for i, user := range users {
-		log.Printf("Book %d: %#v\n", i, user)
-	}
+	return session, nil
 }
