@@ -2,7 +2,6 @@ package cources
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -18,10 +17,6 @@ func CourcesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	err = session.Collection("users").Find().All(&users)
 	if err != nil {
 		log.Printf("Error select users")
-	}
-
-	for _, user := range users {
-		fmt.Printf("%s .\n", user.FirstName)
 	}
 
 	json.NewEncoder(w).Encode(users)
