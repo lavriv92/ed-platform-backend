@@ -35,5 +35,5 @@ func ValidateToken(validToken string) (string, error){
 		log.Printf("invalid token")
 		return "", err
 	}
-	return token.Claims["userId"].(string)
+	return token.Claims["userId"].(string), nil
 }
