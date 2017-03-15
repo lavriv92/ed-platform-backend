@@ -11,7 +11,7 @@ import (
 func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	session, err := models.NewSession()
 	if err != nil {
-		log.Printf("Format err")
+		log.Printf("error creating session")
 	}
 	var users []models.User
 	err = session.Collection("users").Find().All(&users)

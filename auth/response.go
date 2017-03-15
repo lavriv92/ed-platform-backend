@@ -1,5 +1,5 @@
 package auth
 
 type AuthSuccessResponse struct {
-	Token string `json:"token"`
+	Token string `json:"authToken"`
 }
