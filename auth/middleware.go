@@ -1,6 +1,1 @@
 package auth
-
-
-func ValidateUserToken()  {
-	
-}

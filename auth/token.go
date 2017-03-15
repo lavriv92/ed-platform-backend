@@ -11,13 +11,12 @@ const (
 	SecretKey = "some-secret-key"
 )
 
-func CreateToken() (string, error) {
+func CreateToken(id uint64) (string, error) {
 	token := jwt.New(jwt.GetSigningMethod("HS256"))
 	claims := make(jwt.MapClaims)
-	token.Claims = jwt.MapClaims{
-		"userId": 1,
-		"exp": tome.Now().Add(time.Hour * 24 * 7).Unix(),
-	}
+	claims["userId"] = id
+	claims["exp"] = time.Now().Add(time.Hour * 24 * 7).Unix()
+	token.Claims = claims
 
 	tokenString, err := token.SignedString([]byte(SecretKey))
 	if err != nil {
@@ -28,12 +27,12 @@ func CreateToken() (string, error) {
 }
 
 func ValidateToken(validToken string) (string, error){
-	token, err := jwt.Parse(validToken, func (token *jwt.Token) ([]byte, error) {
+	token, err := jwt.Parse(validToken, func (token *jwt.Token) (interface{}, error) {
 		return []byte(SecretKey), nil
 	})
 	if err != nil && !token.Valid {
 		log.Printf("invalid token")
 		return "", err
 	}
-	return token.Claims["userId"].(string), nil
+	return "", nil
 }
