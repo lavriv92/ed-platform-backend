@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-
 	"app/models"
 )
 
@@ -18,6 +17,6 @@ func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Printf("Error select users")
 	}
-
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	json.NewEncoder(w).Encode(users)
 }

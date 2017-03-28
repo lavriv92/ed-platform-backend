@@ -1,13 +1,5 @@
 package config
 
-struct Config {
-	configFile: ''
-}
-
-func NewConfig(filePath string) {
+func NewConfig(file string) {
 	return Config{filePath}
-}
-
-func FromString(key string) string {
-	
 }

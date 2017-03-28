@@ -9,10 +9,11 @@ import (
 
 const (
 	SecretKey = "some-secret-key"
+	SigningMethod = "HS256"
 )
 
 func CreateToken(id uint64) (string, error) {
-	token := jwt.New(jwt.GetSigningMethod("HS256"))
+	token := jwt.New(jwt.GetSigningMethod(SigningMethod))
 	claims := make(jwt.MapClaims)
 	claims["userId"] = id
 	claims["exp"] = time.Now().Add(time.Hour * 24 * 7).Unix()

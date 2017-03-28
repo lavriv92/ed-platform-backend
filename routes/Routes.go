@@ -64,7 +64,7 @@ var routes = Routes{
 	_NewRoute(
 		"auth",
 		"Auth",
-		"GET",
+		"POST",
 		"/token",
 		auth.AuthTokenHandler,
 	),
