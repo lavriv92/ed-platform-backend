@@ -8,6 +8,7 @@ import (
 	"app/courses"
 	"app/errors"
 	"app/logger"
+	"app/users"
 
 	"github.com/gorilla/mux"
 )
@@ -74,5 +75,12 @@ var routes = Routes{
 		"GET",
 		"/courses",
 		courses.CoursesIndexHandler,
+	),
+	_NewApiRoute(
+		"api",
+		"Users",
+		"POST",
+		"/users",
+		users.UsersCreateHandler,
 	),
 }

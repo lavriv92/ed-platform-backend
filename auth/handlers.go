@@ -6,15 +6,14 @@ import (
 	"app/users"
 )
 
-type RequestData struct {
+type TokenRequestData struct {
 	Email    string `json:"email"`
 	Password string `json: "password"`
 }
 
 func AuthTokenHandler(w http.ResponseWriter, r *http.Request) {
-	decoder := json.NewDecoder(r.Body)
-	var requestData RequestData
-	err := decoder.Decode(&requestData)
+	var requestData TokenRequestData
+	err := json.NewDecoder(r.Body).Decode(&requestData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
