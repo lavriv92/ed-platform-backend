@@ -43,6 +43,9 @@ func Create(user models.User) error {
 		log.Fatal(err)
 		return err
 	}
-	session.Collection(CollectionName).Insert(user)
+	err = session.Collection(CollectionName).Insert(user)
+	if err != nil {
+		log.Fatal(err)
+	}
 	return nil
 }

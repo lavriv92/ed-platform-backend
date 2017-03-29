@@ -19,8 +19,8 @@ func AuthTokenHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	user, err := users.FindByEmail(requestData.Email)
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
-	if err != nil {
-		http.Error(w, "User can not found", http.StatusNotFound);
+	if err != nil || user.ValidPassword(requestData.Password) {
+		http.Error(w, "User can not found or password is incorrect", http.StatusNotFound);
 	} else {
 		token, err := CreateToken(user.ID)
 		if err != nil {
