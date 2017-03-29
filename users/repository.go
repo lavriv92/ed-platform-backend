@@ -37,15 +37,12 @@ func FindById(id int64) (*models.User, error) {
 	return &user, nil
 }
 
-func Create(user models.User) error {
+func Create(user models.NewUser) error {
 	session, err := models.NewSession()
 	if err != nil {
 		log.Fatal(err)
 		return err
 	}
-	err = session.Collection(CollectionName).Insert(user)
-	if err != nil {
-		log.Fatal(err)
-	}
+	session.Collection(CollectionName).Insert(user)
 	return nil
 }
