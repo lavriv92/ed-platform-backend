@@ -21,12 +21,11 @@ func AuthTokenHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	if err != nil || !user.ValidPassword(requestData.Password) {
 		http.Error(w, "User can not found or password is incorrect", http.StatusNotFound);
-	} else {
-		token, err := CreateToken(user.ID)
-		if err != nil {
-			http.Error(w, "Error with create token", http.StatusInternalServerError)
-		}
-		response := AuthSuccessResponse{token, user}
-		json.NewEncoder(w).Encode(response)
 	}
+	token, err := CreateToken(user.ID)
+	if err != nil {
+		http.Error(w, "Error with create token", http.StatusInternalServerError)
+	}
+	response := AuthSuccessResponse{token, user}
+	json.NewEncoder(w).Encode(response)
 }

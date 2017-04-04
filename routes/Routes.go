@@ -31,8 +31,7 @@ func NewRouter() *mux.Router {
 	router.NotFoundHandler = http.HandlerFunc(errors.RouteNotFoundHandler)
 	for _, route := range routes {
 		var handler http.Handler
-		handler = route.HandlerFunc
-		handler = logger.Logger(handler, route.Name)
+		handler = logger.Logger(route.HandlerFunc, route.Name)
 		router.
 			Methods(route.Method).
 			Path(route.Pattern).
