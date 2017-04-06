@@ -19,7 +19,7 @@ func AuthenticateMiddleware(inner http.HandlerFunc) http.HandlerFunc {
 			http.Error(w, "Not authorized", 401)
 			return
 		}
-		log.Printf("userid %s", userId)
+		log.Printf("userid %g", userId)
 		inner.ServeHTTP(w, r)
 	}
 }

@@ -3,7 +3,6 @@ package auth
 import (
 	"log"
 	"time"
-	"fmt"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -28,16 +27,16 @@ func CreateToken(id uint64) (string, error) {
 	return tokenString, nil
 }
 
-func ValidateToken(validToken string) (string, error){
+func ValidateToken(validToken string) (interface{}, error){
 	token, err := jwt.Parse(validToken, func(token *jwt.Token) (interface{}, error) {
 		return []byte(SecretKey), nil
 	})
 	if err != nil && !token.Valid {
 		log.Printf("invalid token")
-		return "", err
+		return nil, err
 	}
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		return fmt.Sprintf("%s", claims["userId"]), nil
+		return claims["userId"], nil
 	}
-	return "", nil
+	return nil, nil
 }
