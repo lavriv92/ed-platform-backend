@@ -31,7 +31,7 @@ func ValidateToken(validToken string) (interface{}, error){
 	token, err := jwt.Parse(validToken, func(token *jwt.Token) (interface{}, error) {
 		return []byte(SecretKey), nil
 	})
-	if err != nil && !token.Valid {
+	if err != nil {
 		log.Printf("invalid token")
 		return nil, err
 	}
