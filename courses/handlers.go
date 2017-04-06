@@ -16,3 +16,7 @@ func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	json.NewEncoder(w).Encode(courses)
 }
+
+func CoursesCreateHandler(w http.ResponseWriter, r *http.Request) {
+	
+}

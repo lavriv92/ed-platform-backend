@@ -1,6 +1,7 @@
 package courses
 
 import (
+	"log"
 	"app/models"
 )
 
@@ -19,4 +20,14 @@ func GetAllCourses() (*[]models.Course, error) {
 		return nil, err
 	}
 	return &courses, nil
+}
+
+func Create(course models.NewCourse) error {
+	session, err := models.NewSession()
+	if err != nil {
+		log.Fatal(err)
+		return err
+	}
+	session.Collection(CollectionName).Insert(course)
+	return nil
 }

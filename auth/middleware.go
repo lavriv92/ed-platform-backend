@@ -1,9 +1,9 @@
 package auth
 
 import (
-	"log"
 	"strings"
 	"net/http"
+	"github.com/gorilla/context"
 )
 
 func AuthenticateMiddleware(inner http.HandlerFunc) http.HandlerFunc {
@@ -19,7 +19,7 @@ func AuthenticateMiddleware(inner http.HandlerFunc) http.HandlerFunc {
 			http.Error(w, "Not authorized", 401)
 			return
 		}
-		log.Printf("userid %g", userId)
+		context.Set(r, "currentUserId", userId)
 		inner.ServeHTTP(w, r)
 	}
 }

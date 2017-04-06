@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS courses (
 	author_id         INT NOT NULL REFERENCES users,
 	created_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
 	updated_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-)
+);
 
 CREATE TABLE IF NOT EXISTS users_courses (
 	user_id   INT NOT NULL REFERENCES users,
-	cource_id INT NOT NULL REFERENCES cources
+	cource_id INT NOT NULL REFERENCES courses
 );

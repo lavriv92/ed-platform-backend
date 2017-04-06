@@ -75,8 +75,8 @@ var routes = Routes{
 		"/courses",
 		courses.CoursesIndexHandler,
 	),
-	_NewApiRoute(
-		"api",
+	_NewRoute(
+		"auth",
 		"Users",
 		"POST",
 		"/users",
