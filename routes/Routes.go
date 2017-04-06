@@ -56,7 +56,7 @@ func _NewApiRoute(namespace string, name string, method string, endpoint string,
 		name,
 		method,
 		fmt.Sprintf("/%s/v%s%s", namespace, API_VERSION, endpoint),
-		handler,
+		auth.AuthenticateMiddleware(handler),
 	}
 }
 
