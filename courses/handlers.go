@@ -1,22 +1,18 @@
 package courses
 
 import (
-	"encoding/json"
 	"log"
+	"encoding/json"
 	"net/http"
-	"app/models"
 )
 
 func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
-	session, err := models.NewSession()
+	courses, err := GetAllCourses()
 	if err != nil {
-		log.Printf("error creating session")
-	}
-	var users []models.User
-	err = session.Collection("users").Find().All(&users)
-	if err != nil {
-		http.Error(w, "Error select course", http.StatusNotFound)
+		log.Printf("%s", err)
+		http.Error(w, "Courses not found", http.StatusNotFound)
+		return
 	}
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
-	json.NewEncoder(w).Encode(users)
+	json.NewEncoder(w).Encode(courses)
 }
