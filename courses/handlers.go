@@ -4,6 +4,9 @@ import (
 	"log"
 	"encoding/json"
 	"net/http"
+	"app/models"
+	
+	"github.com/gorilla/context"
 )
 
 func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,5 +21,14 @@ func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func CoursesCreateHandler(w http.ResponseWriter, r *http.Request) {
-	
+	var course models.NewCourse
+	json.NewDecoder(r.Body).Decode(&course)
+	userId := context.Get(r, "currentUserId")
+	log.Printf("%s", userId)
+	course.SetAuthorID(userId.(uint64))
+	err := Create(course)
+	if err != nil {
+		http.Error(w, "Error create course", http.StatusBadRequest)
+	}
+	json.NewEncoder(w).Encode(course)
 }

@@ -1,12 +1,16 @@
 package models
 
 type NewCourse struct {
-	AuthorId    float64 `db:"author_id"`
-	Title       string  `db:"title"`
-	Description string  `db:"description"`
+	AuthorID    uint64 `db:"author_id" json:"author_id"`
+	Title       string  `db:"title" json:"title"`
+	Description string  `db:"description" json:"description"`
 }
 
 type Course struct {
 	*NewCourse
-	ID          float64 `db:"id"`
+	ID          uint64 `db:"id" json:"id"`
+}
+
+func (c *NewCourse) SetAuthorID(id uint64) {
+	c.AuthorID = id
 }
