@@ -4,27 +4,24 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"encoding/json"
-
-	"upper.io/db.v3/lib/sqlbuilder"
 )
 
-type Config struct {
-	database: sqlbuilder.Database
+type Config struct {}
+
+func NewConfig() Config {
+	return Config{}
 }
 
-var config = &Config{}
-
 func (config *Config) Load() {
-	filePath = filepath.Join(filepath.Base(""), "config.json")
-	file, err := os.Open(filepath)
+	filePath := filepath.Join(filepath.Base(""), "config.yml")
+	file, err := os.Open(filePath)
 	if err != nil {
-		log.Fatal("Error load loading config from %s", filepath)
+		log.Fatal("Error load loading config from %s", filePath)
 	}
-	var fileData []byte 
-	_, err := file.Read(fileData)
+	fileData := make([]byte, 100)
+	n, err := file.Read(fileData)
 	if err != nil {
 		log.Fatal("Error parsing config")
 	}
-	log.Printf("%s", fileData)
+	log.Printf("%d / %s", n, string(fileData))
 }

@@ -6,11 +6,15 @@ import (
 	"net/http"
 
 	"app/routes"
+	"app/config"
 
 	"github.com/gorilla/handlers"
 )
 
 func main() {
+	config := config.NewConfig()
+	config.Load();
+
 	router := routes.NewRouter()
 
 	fmt.Println("Server listen on http://localhost:8080")
