@@ -3,20 +3,13 @@ package users
 import (
 	"log"
 	"app/models"
-
-	"upper.io/db.v3/lib/sqlbuilder"
 )
 
 const (
 	CollectionName = "users"
 )
 
-
-type UsersRepository {
-	dbSession  sqlbuilder.Database
-}
-
-func (r *UsersRepository) FindByEmail(email string) (*models.User, error){
+func FindByEmail(email string) (*models.User, error){
 	var user models.User
 	session, err := models.NewSession()
 	if err != nil {
@@ -30,7 +23,7 @@ func (r *UsersRepository) FindByEmail(email string) (*models.User, error){
 	return &user, nil
 }
 
-func (r *UsersRepository) FindById(id int64) (*models.User, error) {
+func FindById(id int64) (*models.User, error) {
 	var user models.User
 	session, err := models.NewSession()
 	if err != nil {
@@ -44,7 +37,7 @@ func (r *UsersRepository) FindById(id int64) (*models.User, error) {
 	return &user, nil
 }
 
-func (r *UsersRepository) Create(user models.NewUser) error {
+func Create(user models.NewUser) error {
 	session, err := models.NewSession()
 	if err != nil {
 		log.Fatal(err)

@@ -3,6 +3,7 @@ package auth
 import (
 	"log"
 	"time"
+	"app/models"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -12,10 +13,11 @@ const (
 	SigningMethod = "HS256"
 )
 
-func CreateToken(id uint64) (string, error) {
+func CreateToken(user *models.User) (string, error) {
 	token := jwt.New(jwt.GetSigningMethod(SigningMethod))
 	claims := make(jwt.MapClaims)
-	claims["userId"] = id
+	claims["userId"] = user.ID
+	claims["userEmail"] = user.Email
 	claims["exp"] = time.Now().Add(time.Hour * 24 * 7).Unix()
 	token.Claims = claims
 

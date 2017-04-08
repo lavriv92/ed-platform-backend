@@ -3,6 +3,7 @@ package auth
 import (
 	"strings"
 	"net/http"
+
 	"github.com/gorilla/context"
 )
 

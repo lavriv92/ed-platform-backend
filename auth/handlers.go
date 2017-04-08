@@ -24,7 +24,7 @@ func AuthTokenHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "User can not found or password is incorrect", http.StatusNotFound);
 		return
 }
-	token, err := CreateToken(user.ID)
+	token, err := CreateToken(user)
 	if err != nil {
 		http.Error(w, "Error with create token", http.StatusInternalServerError)
 		return
