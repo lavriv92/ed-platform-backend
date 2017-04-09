@@ -7,10 +7,10 @@ type NewLesson struct {
 }
 
 type Lesson struct {
-	*NewLesson,
+	*NewLesson
 	Id uint64 `db:"id"`
 }
 
-func (l *NewLesson)SetCourse(courseId uint64) {
+func (l *NewLesson) SetCourse(courseId uint64) {
 	l.CourseId = courseId
 }
