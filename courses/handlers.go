@@ -7,6 +7,7 @@ import (
 	"app/models"
 	
 	"github.com/gorilla/context"
+	"github.com/gorilla/mux"
 )
 
 func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +19,18 @@ func CoursesIndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
 	json.NewEncoder(w).Encode(courses)
+}
+
+func CourseGetHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	course, err := GetCourse(vars["id"])
+	if err != nil {
+		log.Printf("%s", err)
+		http.Error(w, "Course not found", http.StatusNotFound)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	json.NewEncoder(w).Encode(course)
 }
 
 func CoursesCreateHandler(w http.ResponseWriter, r *http.Request) {

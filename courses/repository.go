@@ -23,6 +23,20 @@ func GetAllCourses() (*[]models.Course, error) {
 	return &courses, nil
 }
 
+func GetCourse(courseId string) (*models.Course, error) {
+	session, err := models.NewSession()
+	if err != nil {
+		log.Fatal("Error connection database")
+		return nil, err
+	}
+	var course models.Course
+	err = session.Collection(CollectionName).Find().Where("id = ?", courseId).One(&course)
+	if err != nil {
+		return nil, err
+	} 
+	return &course, nil
+}
+
 func Create(course models.NewCourse) error {
 	session, err := models.NewSession()
 	if err != nil {
