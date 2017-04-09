@@ -23,3 +23,11 @@ CREATE TABLE IF NOT EXISTS users_courses (
 	user_id   INT NOT NULL REFERENCES users,
 	cource_id INT NOT NULL REFERENCES courses
 );
+
+CREATE TABLE IF NOT EXISTS lessons (
+	course_id   INT NOT NULL REFERENCES courses,
+	name        VARCHAR(200) NOT NULL,
+	description TEXT,
+	created_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+	updated_timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
