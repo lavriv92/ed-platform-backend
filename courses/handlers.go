@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"app/models"
+	"app/lessons"
 	
 	"github.com/gorilla/context"
 	"github.com/gorilla/mux"
@@ -45,3 +46,13 @@ func CoursesCreateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(course)
 }
+
+func CourseLessonsHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	lessons, err := lessons.GetLessonByCourseId(vars["id"])
+	if err != nil {
+		http.Error(w, "Error get lessons", http.StatusBadRequest)
+		return
+	}
+	json.NewEncoder(w).Encode(lessons)
+} 

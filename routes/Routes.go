@@ -89,6 +89,13 @@ var routes = Routes{
 		"/courses/{id}",
 		courses.CourseGetHandler,
 	),
+	_NewApiRoute(
+		"api",
+		"CourseLessons",
+		"GET",
+		"/courses/{id}/lessons",
+		courses.CourseLessonsHandler,
+	),
 	_NewRoute(
 		"auth",
 		"Users",
