@@ -26,9 +26,7 @@ func (app_router *AppRouter) AddNamespace(namespaceName string, routes Routes, m
 	for _, route := range routes {
 		var handler http.HandlerFunc
 		handler = logger.Logger(route.HandlerFunc, route.Name)
-		for _, middleware := range middlewares {
-			handler = middleware(handler)
-		}
+		handler = ApplyMiddlewares(handler, middlewares)
 		namespace.
 			Methods(route.Method).
 			Path(route.Pattern).
@@ -37,6 +35,13 @@ func (app_router *AppRouter) AddNamespace(namespaceName string, routes Routes, m
 
 	}
 	return app_router
+}
+
+func ApplyMiddlewares(handler http.HandlerFunc, middlewares []func(http.HandlerFunc) http.HandlerFunc) http.HandlerFunc {
+	for _, middleware := range middlewares {
+		handler = middleware(handler)
+	}
+	return handler
 }
 
 func NewRouter() *mux.Router {
