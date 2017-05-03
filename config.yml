@@ -1,1 +1,6 @@
-port: 8080
+port: ":8080"
+database:
+  host: "db:5432"
+  name: "ed_platform"
+  user: "ed_platform_user"
+  password: "ed_platform_password"

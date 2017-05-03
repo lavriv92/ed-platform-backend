@@ -2,26 +2,40 @@ package config
 
 import (
 	"log"
-	"os"
 	"path/filepath"
+	"github.com/moraes/config"
 )
 
-type Config struct {}
-
-func NewConfig() Config {
-	return Config{}
+type Config struct {
+	cfg *config.Config
 }
 
-func (config *Config) Load() {
-	filePath := filepath.Join(filepath.Base(""), "config.yml")
-	file, err := os.Open(filePath)
-	if err != nil {
-		log.Fatal("Error load loading config from %s", filePath)
+const fileByteSize = 100
+
+var conf *Config
+
+func NewConfig() *Config {
+	if conf == nil {
+		conf = &Config{nil}
 	}
-	fileData := make([]byte, 100)
-	n, err := file.Read(fileData)
-	if err != nil {
-		log.Fatal("Error parsing config")
+	return conf
+}
+
+func (c *Config) Load(configFile string) {
+	if c.cfg == nil {
+		configPath := filepath.Join(filepath.Base("."), "config.yml")
+		cfg, err := config.ParseYamlFile(configPath)
+		if err != nil {
+			log.Fatal("Error parsing config: %s", err.Error())
+		}
+		c.cfg = cfg
 	}
-	log.Printf("%d / %s", n, string(fileData))
+}
+
+func (c *Config)Get(key string) string {
+	value, err := c.cfg.String(key)
+	if err != nil {
+		log.Fatal("Can not load value by key: %s ", err.Error())
+	}
+	return value
 }

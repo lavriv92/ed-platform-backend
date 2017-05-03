@@ -12,13 +12,14 @@ import (
 )
 
 func main() {
-	config := config.NewConfig()
-	config.Load()
+
+	cfg := config.NewConfig()
+	cfg.Load("config.yml")
 
 	router := routes.NewRouter()
 
 	fmt.Println("Server listen on http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(
+	log.Fatal(http.ListenAndServe(cfg.Get("port"), handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
 		handlers.AllowedMethods([]string{"POST"}),
 		handlers.AllowedHeaders([]string{"Content-Type", "X-Requested-With"}),
