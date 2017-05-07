@@ -21,7 +21,7 @@ type Route struct {
 
 type Routes []Route
 
-var auth_routes = Routes{
+var authRoutes = Routes{
 	Route{
 		"Token",
 		"POST",
@@ -36,7 +36,7 @@ var auth_routes = Routes{
 	},
 }
 
-var api_routes = Routes{
+var apiRoutes = Routes{
 	Route{
 		"Courses",
 		"GET",

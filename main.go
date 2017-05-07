@@ -18,7 +18,7 @@ func main() {
 
 	router := routes.NewRouter()
 
-	fmt.Println("Server listen on http://localhost:8080")
+	fmt.Println("Server listen on http://localhost", cfg.Get("port"))
 	log.Fatal(http.ListenAndServe(cfg.Get("port"), handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
 		handlers.AllowedMethods([]string{"POST"}),
