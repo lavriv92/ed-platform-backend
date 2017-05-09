@@ -47,7 +47,7 @@ func ApplyMiddlewares(handler http.HandlerFunc, middlewares []func(http.HandlerF
 func NewRouter() *mux.Router {
 	r := NewAppRouter()
 	r.
-		AddNamespace("/api/v1", apiRloutes, auth.AuthenticateMiddleware).
+		AddNamespace("/api/v1", apiRoutes, auth.AuthenticateMiddleware).
 		AddNamespace("/auth", authRoutes)
 	return r.router
 }
